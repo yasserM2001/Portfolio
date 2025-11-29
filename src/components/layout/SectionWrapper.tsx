@@ -17,7 +17,7 @@ const SectionWrapper = ({
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className={`min-h-screen py-20 px-4 flex items-center border-b ${className}`}
+      className={`min-h-screen py-20 px-4 flex items-center border-b border-muted ${className}`}
     >
       <div className="container max-w-6xl mx-auto w-full">
         {/* Header */}
