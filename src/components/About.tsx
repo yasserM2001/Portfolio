@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./Card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/Card";
 import { GraduationCap, Calendar, Briefcase, MapPin, Code, Database, Brain, Shield } from "lucide-react";
 import SectionWrapper from "./layout/SectionWrapper";
 
