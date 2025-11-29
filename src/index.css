@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(222, 47%, 11%);
+  --color-foreground: hsl(210, 40%, 98%);
+
+  --color-card: hsl(217, 32%, 17%);
+  --color-card-foreground: hsl(210, 40%, 98%);
+
+  --color-popover: hsl(215, 24%, 26%);
+  --color-popover-foreground: hsl(210, 40%, 98%);
+
+  --color-primary: hsl(198, 93%, 59%);
+  --color-primary-foreground: hsl(204, 80%, 15%);
+
+  --color-secondary: hsl(212, 26%, 83%);
+  --color-secondary-foreground: hsl(228, 84%, 4%);
+
+  --color-muted: hsl(215, 16%, 46%);
+  --color-muted-foreground: hsl(210, 40%, 98%);
+
+  --color-accent: hsl(228, 84%, 4%);
+  --color-accent-foreground: hsl(215, 20%, 65%);
+
+  --color-destructive: hsl(0, 84%, 60%);
+  --color-destructive-foreground: hsl(0, 85%, 97%);
+
+  --color-border: hsl(215, 19%, 34%);
+  --color-input: hsl(215, 19%, 34%);
+  --color-ring: hsl(198, 93%, 59%);
+
+  --color-sidebar-background: hsl(240, 5.9%, 10%);
+  --color-sidebar-foreground: hsl(210, 40%, 98%);
+  --color-sidebar-primary: hsl(198, 93%, 59%);
+  --color-sidebar-primary-foreground: hsl(204, 80%, 15%);
+  --color-sidebar-accent: hsl(215, 20%, 65%);
+  --color-sidebar-accent-foreground: hsl(228, 84%, 4%);
+  --color-sidebar-border: hsl(215, 19%, 34%);
+  --color-sidebar-ring: hsl(198, 93%, 59%);
+
+  --color-chart-1: hsl(199, 95%, 73%);
+  --color-chart-2: hsl(211, 96%, 78%);
+  --color-chart-3: hsl(215, 20%, 65%);
+  --color-chart-4: hsl(215, 16%, 46%);
+  --color-chart-5: hsl(215, 19%, 34%);
+
+  --color-sidebar: hsl(217, 32%, 17%);
+
+  /* Shadows */
+  --shadow-2xs: 0 1px 3px 0px hsl(0, 0%, 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0, 0%, 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0, 0%, 0% / 0.1), 0 1px 2px -1px hsl(0, 0%, 0% / 0.1);
+  --shadow:    0 1px 3px 0px hsl(0, 0%, 0% / 0.1), 0 1px 2px -1px hsl(0, 0%, 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0, 0%, 0% / 0.1), 0 2px 4px -1px hsl(0, 0%, 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0, 0%, 0% / 0.1), 0 4px 6px -1px hsl(0, 0%, 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0, 0%, 0% / 0.1), 0 8px 10px -1px hsl(0, 0%, 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0, 0%, 0% / 0.25);
+}
