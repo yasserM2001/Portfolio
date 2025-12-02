@@ -1,6 +1,22 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from "lucide-react";
+import { Send } from "lucide-react";
 import SectionWrapper from "./layout/SectionWrapper";
+import { CONTACT_INFO, SOCIAL_ICONS } from "../constants/data";
+import { FORM_SUBMIT_DELAY, SUCCESS_RESET_DELAY } from "../constants/config";
+import type { FormData, FormStatus } from "../constants/types";
+
+// Simple validation utility
+const validateForm = (data: FormData): { valid: boolean; errors: Record<string, string> } => {
+  const errors: Record<string, string> = {};
+  
+  if (!data.name.trim()) errors.name = "Name is required";
+  if (!data.email.trim()) errors.email = "Email is required";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = "Invalid email format";
+  if (!data.subject.trim()) errors.subject = "Subject is required";
+  if (!data.message.trim()) errors.message = "Message is required";
+  
+  return { valid: Object.keys(errors).length === 0, errors };
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,68 +26,58 @@ const Contact = () => {
     message: ""
   });
 
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error for this field when user starts typing
+    if (validationErrors[name]) {
+      setValidationErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form
+    const { valid, errors } = validateForm(formData);
+    if (!valid) {
+      setValidationErrors(errors);
+      return;
+    }
+    
     setStatus("sending");
+    setValidationErrors({});
     
     // Simulate form submission
     setTimeout(() => {
-      console.log("Form submitted:", formData);
+      // In production, send to backend/email service here
+      console.warn("Form submission mock - in production, integrate with email service");
       setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ 
+        name: "", 
+        email: "", 
+        subject: "", 
+        message: ""
+      });
       
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 1500);
+      setTimeout(() => setStatus("idle"), SUCCESS_RESET_DELAY);
+    }, FORM_SUBMIT_DELAY);
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "yassermohamed166@icloud.com",
-      href: "mailto:yassermohamed166@icloud.com"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+201004237003",
-      href: "tel:+201004237003"
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Alexandria, Egypt",
-      href: null
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: "GitHub",
-      href: "https://github.com/yasserM2001",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "#",
-    }
-  ];
 
   return (
     <SectionWrapper
       id="contact"
       title="Get In Touch"
-      subtitle="Let's Work Together"
     >
       <div className="grid lg:grid-cols-2 gap-12">
         
@@ -87,7 +93,7 @@ const Contact = () => {
 
           {/* Contact Details */}
           <div className="space-y-4">
-            {contactInfo.map((item) => (
+            {CONTACT_INFO.map((item) => (
               <div
                 key={item.label}
                 className="flex items-start gap-4 p-4 rounded-lg bg-accent/30 hover:bg-accent/50 transition-colors"
@@ -118,7 +124,7 @@ const Contact = () => {
           <div>
             <h4 className="font-semibold mb-4">Connect With Me</h4>
             <div className="flex gap-4">
-              {socialLinks.map((social) => (
+              {SOCIAL_ICONS.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -151,9 +157,14 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+                    validationErrors.name ? "border-red-500" : "border-border"
+                  }`}
                   placeholder="Your name"
                 />
+                {validationErrors.name && (
+                  <p className="text-red-500 text-xs mt-1">{validationErrors.name}</p>
+                )}
               </div>
 
               {/* Email Input */}
@@ -167,9 +178,14 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+                    validationErrors.email ? "border-red-500" : "border-border"
+                  }`}
                   placeholder="your.email@example.com"
                 />
+                {validationErrors.email && (
+                  <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>
+                )}
               </div>
 
               {/* Subject Input */}
@@ -183,9 +199,14 @@ const Contact = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+                    validationErrors.subject ? "border-red-500" : "border-border"
+                  }`}
                   placeholder="What's this about?"
                 />
+                {validationErrors.subject && (
+                  <p className="text-red-500 text-xs mt-1">{validationErrors.subject}</p>
+                )}
               </div>
 
               {/* Message Textarea */}
@@ -199,9 +220,14 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                  className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none ${
+                    validationErrors.message ? "border-red-500" : "border-border"
+                  }`}
                   placeholder="Your message..."
                 />
+                {validationErrors.message && (
+                  <p className="text-red-500 text-xs mt-1">{validationErrors.message}</p>
+                )}
               </div>
 
               {/* Submit Button */}

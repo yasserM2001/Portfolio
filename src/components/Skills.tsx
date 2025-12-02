@@ -1,30 +1,9 @@
 import { motion } from "framer-motion";
-import { Code2, Server, Brain, Wrench } from "lucide-react";
+import { SKILL_CATEGORIES } from "../constants/data";
+import { ANIMATION_DURATION } from "../constants/config";
 import SectionWrapper from "./layout/SectionWrapper";
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      category: "Frontend",
-      icon: Code2,
-      skills: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Framer Motion", "HTML/CSS", "JavaScript"]
-    },
-    {
-      category: "Backend",
-      icon: Server,
-      skills: [".NET Core", "ASP.NET", "C#", "Node.js", "Express.js", "RESTful APIs", "SQL Server"]
-    },
-    {
-      category: "AI / ML",
-      icon: Brain,
-      skills: ["Python", "NumPy", "Pandas", "FastAPI", "Machine Learning", "NLP"]
-    },
-    {
-      category: "Tools & DevOps",
-      icon: Wrench,
-      skills: ["Git", "GitHub", "Docker", "Postman"]
-    }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -42,7 +21,7 @@ const Skills = () => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.4
+        duration: ANIMATION_DURATION.normal
       }
     }
   };
@@ -53,7 +32,7 @@ const Skills = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.3
+        duration: ANIMATION_DURATION.fast
       }
     }
   };
@@ -70,7 +49,7 @@ const Skills = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
       >
-        {skillCategories.map((item) => (
+        {SKILL_CATEGORIES.map((item) => (
           <motion.div
             key={item.category}
             variants={itemVariants}
@@ -91,7 +70,7 @@ const Skills = () => {
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
               variants={containerVariants}
             >
-              {item.skills.map((skill, index) => (
+              {item.skills.map((skill, _) => (
                 <motion.div
                   key={skill}
                   variants={skillVariants}

@@ -1,40 +1,11 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
+import { NAV_ITEMS, SOCIAL_ICONS } from "../constants/data";
+import { SITE_CONFIG } from "../constants/config";
+import { useScrollToSection } from "../hooks/useScrollToSection";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
-
-    const footerLinks = [
-        { label: "Home", href: "#home" },
-        { label: "About", href: "#about" },
-        { label: "Skills", href: "#skills" },
-        { label: "Projects", href: "#projects" },
-        { label: "Contact", href: "#contact" }
-    ];
-
-    const socialLinks = [
-        {
-            icon: Github,
-            label: "GitHub",
-            href: "https://github.com/yasserM2001",
-        },
-        {
-            icon: Linkedin,
-            label: "LinkedIn",
-            href: "#",
-        },
-        {
-            icon: Mail,
-            label: "Email",
-            href: "mailto:yassermohamed166@icloud.com",
-        }
-    ];
-
-    const scrollToSection = (href: string) => {
-        const element = document.querySelector(href);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
-    };
+    const scrollToSection = useScrollToSection();
 
     return (
         <footer className="bg-card border-t border-border">
@@ -46,14 +17,14 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="space-y-4">
                         <h3 className="text-2xl font-bold text-foreground">
-                            Yasser Mohamed
+                            {SITE_CONFIG.name}
                         </h3>
                         <p className="text-muted-foreground text-sm leading-relaxed">
                             Software Engineer passionate about building elegant solutions
                             with modern technologies.
                         </p>
                         <div className="flex gap-3">
-                            {socialLinks.map((social) => (
+                            {SOCIAL_ICONS.map((social) => (
                                 <a
                                     key={social.label}
                                     href={social.href}
@@ -74,7 +45,7 @@ const Footer = () => {
                             Quick Links
                         </h4>
                         <nav className="flex flex-col space-y-2">
-                            {footerLinks.map((link) => (
+                            {NAV_ITEMS.map((link) => (
                                 <a
                                     key={link.label}
                                     href={link.href}
@@ -97,19 +68,19 @@ const Footer = () => {
                         </h4>
                         <div className="space-y-2 text-sm">
                             <a
-                                href="mailto:yassermohamed166@icloud.com"
+                                href={`mailto:${SITE_CONFIG.email}`}
                                 className="block text-muted-foreground hover:text-primary transition-colors"
                             >
-                                yassermohamed166@icloud.com
+                                {SITE_CONFIG.email}
                             </a>
                             <a
-                                href="tel:+201004237003"
+                                href={`tel:${SITE_CONFIG.phone}`}
                                 className="block text-muted-foreground hover:text-primary transition-colors"
                             >
                                 +20 100 423 7003
                             </a>
                             <p className="text-muted-foreground">
-                                Alexandria, Egypt
+                                {SITE_CONFIG.location}
                             </p>
                         </div>
                     </div>
@@ -122,7 +93,7 @@ const Footer = () => {
 
                         {/* Copyright */}
                         <p className="text-sm text-muted-foreground text-center md:text-left">
-                            © {currentYear} Yasser Mohamed. All rights reserved.
+                            © {currentYear} {SITE_CONFIG.name}. All rights reserved.
                         </p>
 
                         {/* Made with love */}

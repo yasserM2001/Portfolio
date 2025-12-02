@@ -1,46 +1,9 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/Card";
-import { GraduationCap, Calendar, Briefcase, MapPin, Code, Database, Brain, Shield } from "lucide-react";
+import { GraduationCap, Calendar, Briefcase, MapPin } from "lucide-react";
 import SectionWrapper from "./layout/SectionWrapper";
+import { EDUCATION, KNOWLEDGE_AREAS, EXPERIENCES } from "../constants/data";
 
 const About = () => {
-  const knowledgeAreas = [
-    {
-      icon: Code,
-      title: "Software Development",
-      skills: "Strong foundation in programming paradigms, data structures, and algorithm design. Experienced in building efficient, scalable solutions and understanding computational complexity."
-    },
-    {
-      icon: Database,
-      title: "Systems & Architecture",
-      skills: "Deep understanding of operating systems, computer networks, and database design. Skilled in system-level thinking and building robust backend architectures."
-    },
-    {
-      icon: Brain,
-      title: "AI & Machine Learning",
-      skills: "Hands-on experience with machine learning algorithms, natural language processing, and artificial intelligence concepts. Able to implement and deploy ML models for real-world applications."
-    },
-    {
-      icon: Shield,
-      title: "Security",
-      skills: "Knowledge of computer and network security principles, encryption, hashing, authentication, secure coding practices, and threat mitigation techniques."
-    },
-  ];
-
-  const experiences = [
-    {
-      title: "Full Stack Developer Intern (.NET)",
-      company: "MS-Design",
-      location: "Alexandria, Egypt",
-      period: "Summer 2023",
-      description: "Gained hands-on experience developing full-stack web applications using .NET technologies and modern development practices.",
-      highlights: [
-        "Built and maintained web applications using ASP.NET Core and C#",
-        "Worked with SQL Server for database design and management",
-        "Collaborated with senior developers on real-world client projects",
-        "Participated in code reviews and learned industry best practices"
-      ]
-    },
-  ];
 
   return (
     <SectionWrapper
@@ -65,16 +28,16 @@ const About = () => {
                 </div>
                 <div className="flex-1">
                   <CardTitle className="text-xl mb-2">
-                    Bachelor's Degree in Engineering
+                    {EDUCATION.title}
                   </CardTitle>
                   <CardDescription className="text-sm mb-4 text-primary">
-                    Faculty of Engineering, Alexandria, Egypt
+                    {EDUCATION.institution}
                   </CardDescription>
                   <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                     <Calendar className="w-4 h-4" />
-                    <span>2020 – 2025</span>
+                    <span>{EDUCATION.period}</span>
                     <span className="mx-2">•</span>
-                    <span className="font-semibold text-foreground">GPA: 3.67</span>
+                    <span className="font-semibold text-foreground">GPA: {EDUCATION.gpa}</span>
                   </div>
                 </div>
               </div>
@@ -86,7 +49,7 @@ const About = () => {
                   Key Knowledge Areas
                 </h5>
                 <div className="space-y-4">
-                  {knowledgeAreas.map((area, index) => (
+                  {KNOWLEDGE_AREAS.map((area, index) => (
                     <div
                       key={index}
                       className="flex gap-3 p-3 rounded-lg bg-accent/50 hover:bg-accent transition-colors"
@@ -120,7 +83,7 @@ const About = () => {
           </h3>
 
           <div className="space-y-6">
-            {experiences.map((exp, index) => (
+            {EXPERIENCES.map((exp, index) => (
               <Card key={index}>
                 <CardHeader>
                   <div className="flex flex-col items-start gap-4">

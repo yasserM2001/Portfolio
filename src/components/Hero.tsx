@@ -1,8 +1,12 @@
 import { Github, Mail, Phone, MapPin, FileText } from "lucide-react";
 import heroImage from "../assets/hero-bg.jpg";
 import profileImage from "../assets/profile.jpg";
+import { SITE_CONFIG, CV_PATH, SOCIAL_LINKS } from "../constants/config";
+import { useScrollToSection } from "../hooks/useScrollToSection";
 
 const Hero = () => {
+  const scrollToSection = useScrollToSection();
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       <div
@@ -13,7 +17,7 @@ const Hero = () => {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-background/95 via-background/90 to-background"></div>
       </div>
 
       <div className="container relative z-10 px-4 py-20">
@@ -29,7 +33,7 @@ const Hero = () => {
                 />
               </div>
               <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-primary rounded-full flex items-center justify-center border-4 border-background">
-                <a href="https://github.com/yasserM2001" target="_blank">
+                <a href={SOCIAL_LINKS.github} target="_blank">
                   <Github className="w-6 h-6 text-primary-foreground" />
                 </a>
               </div>
@@ -38,42 +42,42 @@ const Hero = () => {
 
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              Yasser Mohamed
+              {SITE_CONFIG.name}
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-serif">
-              Software Engineer
+              {SITE_CONFIG.title}
             </p>
           </div>
 
           <p className="text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto px-4">
-            Passionate about developing scalable backend systems and APIs, with a solid understanding of full-stack application workflows.
+            {SITE_CONFIG.description}
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center text-xs sm:text-sm md:text-base px-4">
             <a
-              href="mailto:yassermohamed166@icloud.com"
+              href={SOCIAL_LINKS.email}
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4" />
-              <span className="break-all">yassermohamed166@icloud.com</span>
+              <span className="break-all">{SITE_CONFIG.email}</span>
             </a>
             <span className="hidden sm:inline text-border">•</span>
             <a
-              href="tel:+201004237003"
+              href={SOCIAL_LINKS.phoneHref}
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4" />
-              +201004237003
+              {SITE_CONFIG.phone}
             </a>
             <span className="hidden sm:inline text-border">•</span>
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              Alexandria, Egypt
+              {SITE_CONFIG.location}
             </span>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 px-4">
             <a
-              href="/Yasser-Mohamed-CV.pdf"
+              href={CV_PATH}
               download
               className="
                 inline-flex items-center justify-center
@@ -89,8 +93,11 @@ const Hero = () => {
               Download CV
             </a>
             {/* Outline Button */}
-            <a
-              href="#contact"
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("#contact");
+              }}
               className="
           inline-flex items-center justify-center
           px-6 py-3
@@ -102,7 +109,7 @@ const Hero = () => {
         "
             >
               Get in Touch
-            </a>
+            </button>
           </div>
         </div>
       </div>

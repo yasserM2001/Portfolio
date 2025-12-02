@@ -1,33 +1,21 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { NAV_ITEMS } from "../constants/data";
+import { SITE_CONFIG, SCROLL_BEHAVIOR } from "../constants/config";
+import { useScrollToSection } from "../hooks/useScrollToSection";
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+	const scrollToSection = useScrollToSection();
 
 	useEffect(() => {
 		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 20);
+			setIsScrolled(window.scrollY > SCROLL_BEHAVIOR.offset);
 		};
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
-
-	const navItems = [
-		{ label: "Home", href: "#home" },
-		{ label: "About", href: "#about" },
-		{ label: "Skills", href: "#skills" },
-		{ label: "Projects", href: "#projects" },
-		{ label: "Contact", href: "#contact" },
-	];
-
-	const scrollToSection = (href: string) => {
-		const element = document.querySelector(href);
-		if (element) {
-			element.scrollIntoView({ behavior: "smooth" });
-			setIsOpen(false);
-		}
-	};
 
 	return (
 		<nav
@@ -46,15 +34,15 @@ const Navbar = () => {
 						}}
 						className="text-xl font-bold hover:text-primary transition-colors"
 					>
-						<span className="bg-primary px-3.5 py-1 rounded-full mr-2 text-white">
+						<span className="bg-primary px-3.5 py-1 rounded-full mr-2 text-accent">
 							Y
 						</span>
-						Yasser Mohamed
+						{SITE_CONFIG.name}
 					</a>
 
 					{/* Desktop Navigation */}
 					<div className="hidden md:flex items-center gap-8">
-						{navItems.map((item) => (
+						{NAV_ITEMS.map((item) => (
 							<a
 								key={item.label}
 								href={item.href}
@@ -67,8 +55,7 @@ const Navbar = () => {
 								{item.label}
 							</a>
 						))}
-					</div>
-
+					</div>					
 					{/* Mobile Menu Button */}
 					<button
 						onClick={() => setIsOpen(!isOpen)}
@@ -83,13 +70,13 @@ const Navbar = () => {
 				{isOpen && (
 					<div className="md:hidden py-4 border-t">
 						<div className="flex flex-col gap-4">
-							{navItems.map((item) => (
+							{NAV_ITEMS.map((item) => (
 								<a
 									key={item.label}
 									href={item.href}
 									onClick={(e) => {
 										e.preventDefault();
-										scrollToSection(item.href);
+										scrollToSection(item.href, () => setIsOpen(false));
 									}}
 									className="text-sm font-medium hover:text-primary transition-colors"
 								>
