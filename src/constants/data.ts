@@ -182,8 +182,8 @@ export const PROJECTS: ProjectItem[] = [
     tags: ["Python", "FastAPI", "LLM", "Machine Learning"],
     highlight: true,
     image: projectMemory,
-    github: "#",
-    demo: "#",
+    github: "https://github.com/yasserM2001/Personal_Memory_QA",
+    demo: "",
   },
   {
     title: "Replicated Key/Value Service",
@@ -200,7 +200,7 @@ export const PROJECTS: ProjectItem[] = [
       "A .NET website where sellers can offer products to customers. Uses SQL Server and Entity Framework for database management. Developed during MS-Design Internship.",
     tags: [".NET", "SQL Server", "Entity Framework", "C#"],
     image: projectShop,
-    github: "#",
+    github: "https://github.com/yasserM2001/Online-Shop",
     demo: "",
   },
   {
@@ -209,7 +209,7 @@ export const PROJECTS: ProjectItem[] = [
       "Full-featured website with authentication for customers, offices, and admin. Manages car rental operations with a comprehensive database.",
     tags: ["Web Development", "Database", "Authentication"],
     image: projectCarRental,
-    github: "#",
+    github: "https://github.com/yasserM2001/Car-Rental-Website",
     demo: "",
   },
   {
@@ -218,7 +218,7 @@ export const PROJECTS: ProjectItem[] = [
       "Single-player game with 2 modes where clowns catch falling colored plates. Collecting three consecutive plates increases score. Built with OOP and design patterns.",
     tags: ["Java", "OOP", "Design Patterns"],
     image: projectGame,
-    github: "#",
+    github: "https://github.com/yasserM2001/Circus-of-Plates",
     demo: "",
   },
   {
@@ -227,7 +227,7 @@ export const PROJECTS: ProjectItem[] = [
       "Simulates how the operating system runs processes, passing multiple processes through three queues with different quantum times.",
     tags: ["Operating Systems", "C", "Process Scheduling"],
     image: projectOS,
-    github: "#",
+    github: "https://github.com/yasserM2001/Process-Management-System",
     demo: "",
   },
 ];
